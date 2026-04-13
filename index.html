@@ -1,1 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lifting Gear Certificate Search</title>
 
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #fff;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: #0078D4;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔍 Lifting Gear Certificate Search</h1>
+
+<input type="text" id="search" placeholder="Search by Tag Number (file name)...">
+
+<ul id="fileList"></ul>
+
+<script>
+const files = [
+"1. AA0253-0401.pdf",
+"2. 2402020002.pdf",
+"3. 2402030168.pdf",
+"4. 2402030166.pdf",
+"5. 2402030169.pdf",
+"6. AA198-0541.pdf",
+"7. AA118-0541.pdf",
+"8. AA040-0541.pdf",
+"9. AA044-0541.pdf",
+"10. 59051819.pdf",
+"11. 2308020022.pdf",
+"12. 2308020023.pdf",
+"13. 2308020024.pdf",
+"14. 2308020025.pdf",
+"15. 6375.pdf",
+"16. 6315.pdf",
+"17. 6481.pdf",
+"18. 6414.pdf",
+"19. 6417.pdf",
+"20. 5964.pdf",
+"21. 1799.pdf",
+"22. 1803.pdf",
+"23. C6697.pdf",
+"24. C6708.pdf",
+"25. C6704.pdf",
+"26. C6702.pdf",
+"27. B7787.pdf",
+"28. B7947.pdf",
+"29. B7601.pdf",
+"30. C2579.pdf",
+"31. C6359.pdf",
+"32. C6357.pdf",
+"33. C6356.pdf",
+"34. C6418.pdf",
+"35. C8034.pdf",
+"36. C8033.pdf",
+"37. C8032.pdf",
+"38. C8031.pdf",
+"39. K4199.pdf",
+"40. K4200.pdf",
+"41. K4201.pdf",
+"42. K4202.pdf",
+"43. K4203.pdf",
+"44. K4204.pdf",
+"45. K4205.pdf",
+"46. K4206.pdf",
+"47. K4207.pdf",
+"48. K4208.pdf",
+"49. K4209.pdf",
+"50. K4213.pdf",
+"51. K4214.pdf",
+"52. K4215.pdf",
+"53. K4216.pdf",
+"54. K4217.pdf",
+"55. K4218.pdf",
+"56. K4219.pdf",
+"57. K4220.pdf",
+"58. K4221.pdf",
+"59. K4222.pdf",
+"60. 772.pdf",
+"61. 779.pdf",
+"62. 132.pdf",
+"63. 131.pdf",
+"64. DQ098708.pdf",
+"65. DQ098709.pdf",
+"66. DQ24100749.pdf",
+"67. DQ24100660.pdf",
+"68. DQ101705.pdf",
+"69. DQ101706.pdf",
+"70. DQ47.pdf",
+"71. DQ37.pdf",
+"72. DQ1.pdf",
+"73. DQ2.pdf",
+"74. DQ3.pdf",
+"75. DQ4.pdf",
+"76. DQ103962.pdf",
+"77. DQ103963.pdf",
+"78. DQ103964.pdf",
+"79. DQ103965.pdf",
+"80. DQ01.pdf",
+"81. DQ02.pdf",
+"82. DQ03.pdf",
+"83. DQ04.pdf",
+"84. DQ05.pdf",
+"85. DQ07.pdf",
+"86. DQ06.pdf",
+"87. DQ08.pdf",
+"88. DQ24100312.pdf",
+"89. DQ24100359.pdf",
+"90. 212786.pdf",
+"91. 212787.pdf",
+"92. 212788.pdf",
+"93. 212789.pdf",
+"94. 6081904168.pdf",
+"95. 6081904169.pdf",
+"96. 6081904158.pdf",
+"97. 6081904170.pdf",
+"98. DDR06101000020497.pdf",
+"99. DDR06101000020006.pdf",
+"100. DDR06101000020275.pdf",
+"101. DDR05893000020016.pdf",
+"102. DDR06100000020860.pdf",
+"103. DDR06075000010448.pdf",
+"104. A 1.pdf",
+"105. A 2.pdf",
+"106. A 3.pdf",
+"107. A 4.pdf",
+"108. E 3.pdf",
+"109. E 4.pdf",
+"110. AA 11.pdf",
+"111. AA 12.pdf",
+"112. AA 13.pdf",
+"113. AA 14.pdf",
+"114. T01210426.pdf",
+"115. T01210395.pdf",
+"116. T01211039.pdf",
+"117. T01211033.pdf",
+"118. T08200233.pdf",
+"119. T08200266.pdf",
+"120. 63180002.pdf",
+"121. 63180001.pdf",
+"122. 6558.pdf",
+"123. 6561.pdf",
+"124. YG861.pdf",
+"125. YG862.pdf",
+"126. YG859.pdf",
+"127. YG860.pdf",
+"128. DQ088092.pdf",
+"129. DQ088093.pdf",
+"130. DQ088094.pdf",
+"131. DQ088095.pdf",
+"132. B1.pdf",
+"133. B2.pdf",
+"134. B3.pdf",
+"135. B4.pdf",
+"136. B5.pdf",
+"137. B6.pdf",
+"138. B7.pdf",
+"139. B8.pdf",
+"140. B9.pdf",
+"141. B10.pdf",
+"142. B11.pdf",
+"143. B12.pdf",
+"144. B13.pdf",
+"145. B14.pdf",
+"146. B15.pdf",
+"147. B16.pdf",
+"148. B20.pdf",
+"149. B21.pdf",
+"150. B22.pdf",
+"151. B23.pdf",
+"152. B24.pdf",
+"153. B25.pdf",
+"154. B26.pdf",
+"155. B27.pdf",
+"156. B17.pdf",
+"157. B18.pdf",
+"158. B19.pdf",
+"159. 2000036.pdf",
+"160. 2000037.pdf",
+"161. Plate clamp.pdf"
+];
+
+const list = document.getElementById("fileList");
+const search = document.getElementById("search");
+
+function render(filter = "") {
+  list.innerHTML = "";
+  files
+    .filter(f => f.toLowerCase().includes(filter.toLowerCase()))
+    .forEach(f => {
+      const li = document.createElement("li");
+      li.innerHTML = `<a href="pdfs/${encodeURIComponent(f)}" target="_t.appendChild(li);
+    });
+}
+
+search.addEventListener("input", e => render(e.target.value));
+render();
+</script>
+
+</body>
+</html>
