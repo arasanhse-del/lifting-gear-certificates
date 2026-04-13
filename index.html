@@ -7,7 +7,7 @@
 <style>
 body {
   font-family: Arial, sans-serif;
-  background-color: #f2f2f2;
+  background-color: #f4f4f4;
   padding: 20px;
 }
 
@@ -19,26 +19,26 @@ h1 {
 input {
   width: 100%;
   padding: 12px;
-  margin: 15px 0;
   font-size: 16px;
+  margin-bottom: 15px;
   box-sizing: border-box;
 }
 
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 li {
-  background: #fff;
-  margin-bottom: 5px;
+  background: #ffffff;
   padding: 10px;
+  margin-bottom: 6px;
   border-radius: 4px;
 }
 
 a {
   text-decoration: none;
-  color: #0078D4;
+  color: #005a9e;
   font-weight: bold;
 }
 </style>
@@ -46,14 +46,18 @@ a {
 
 <body>
 
-<h1>🔍 Lifting Gear Certificate Search</h1>
+<h1>Lifting Gear Certificate Search</h1>
 
-<input type="text" id="search" placeholder="Search by Tag Number (file name)...">
+<input
+  type="text"
+  id="search"
+  placeholder="Search by tag number (file name)..."
+/>
 
 <ul id="fileList"></ul>
 
 <script>
-const files = [
+var files = [
 "1. AA0253-0401.pdf",
 "2. 2402020002.pdf",
 "3. 2402030168.pdf",
@@ -217,21 +221,32 @@ const files = [
 "161. Plate clamp.pdf"
 ];
 
-const list = document.getElementById("fileList");
-const search = document.getElementById("search");
+var list = document.getElementById("fileList");
+var search = document.getElementById("search");
 
-function render(filter = "") {
+function render(filter) {
   list.innerHTML = "";
-  files
-    .filter(f => f.toLowerCase().includes(filter.toLowerCase()))
-    .forEach(f => {
-      const li = document.createElement("li");
-      li.innerHTML = `<a href="pdfs/${encodeURIComponent(f)}" target="_t.appendChild(li);
-    });
+
+  files.forEach(function(file) {
+    if (!filter || file.toLowerCase().includes(filter.toLowerCase())) {
+      var li = document.createElement("li");
+      var link = document.createElement("a");
+
+      link.href = encodeURIComponent(file);   // ✅ ROOT FILE LINK
+      link.target = "_blank";
+      link.textContent = file;
+
+      li.appendChild(link);
+      list.appendChild(li);
+    }
+  });
 }
 
-search.addEventListener("input", e => render(e.target.value));
-render();
+search.addEventListener("input", function() {
+  render(search.value);
+});
+
+render("");
 </script>
 
 </body>
