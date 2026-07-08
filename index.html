@@ -2,62 +2,180 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lifting Gear Certificate Search</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  color: #333;
-}
-
-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  margin-bottom: 15px;
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 20px;
 }
 
-li {
-  background: #ffffff;
-  padding: 10px;
-  margin-bottom: 6px;
-  border-radius: 4px;
+.container {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-a {
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  color: white;
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  font-weight: 700;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header p {
+  font-size: 1.05em;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.search-section {
+  margin-bottom: 40px;
+}
+
+#search {
+  width: 100%;
+  padding: 16px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+#search:focus {
+  outline: none;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  transform: translateY(-2px);
+}
+
+#search::placeholder {
+  color: #999;
+}
+
+.results-info {
+  margin-top: 15px;
+  text-align: center;
+  color: white;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+#resultCount {
+  background: rgba(255,255,255,0.2);
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  backdrop-filter: blur(10px);
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Responsive adjustments for tablets and mobile */
+@media (max-width: 768px) {
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+  }
+
+  header h1 {
+    font-size: 2em;
+  }
+
+  body {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  header h1 {
+    font-size: 1.6em;
+  }
+
+  header p {
+    font-size: 0.95em;
+  }
+}
+
+.certificate-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  text-align: center;
+}
+
+.certificate-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.certificate-card:hover a {
+  color: white;
+}
+
+.certificate-card a {
   text-decoration: none;
-  color: #005a9e;
-  font-weight: bold;
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+  word-break: break-word;
+  line-height: 1.4;
 }
 
-#repoInfo {
-  background: #ffffff;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: white;
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  font-size: 1.2em;
+  backdrop-filter: blur(10px);
 }
 
-#repoInfo h2 {
-  margin: 0 0 6px 0;
-  font-size: 18px;
+.no-results-icon {
+  font-size: 3em;
+  margin-bottom: 15px;
 }
 
-#repoInfo p {
-  margin: 4px 0;
-  color: #333;
+footer {
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9em;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 </style>
@@ -65,20 +183,35 @@ a {
 
 <body>
 
-<h1>Lifting Gear Certificate Search</h1>
+<div class="container">
+  <header>
+    <h1>📋 Lifting Gear Certificates</h1>
+    <p>Store, track, and manage lifting gear inspection certificates in one centralized location</p>
+  </header>
 
-<!-- Notes section -->
-<div id="repoInfo">
-  <p>This Page is designed to store, track, and manage Lifting Gear Inspection Certificates in one centralized location. It provides quick access to third‑party inspection certificates for lifting equipment used across operations.</p>
+  <div class="search-section">
+    <input
+      type="text"
+      id="search"
+      placeholder="🔍 Search by tag number or certificate name..."
+      autocomplete="off"
+    />
+    <div class="results-info">
+      <span id="resultCount">156 certificates available</span>
+    </div>
+  </div>
+
+  <div id="fileList" class="certificates-grid"></div>
+
+  <div id="noResults" class="no-results" style="display: none;">
+    <div class="no-results-icon">🚫</div>
+    <p>No certificates found. Try a different search term.</p>
+  </div>
+
+  <footer>
+    <p>✓ All certificates securely stored and easily searchable</p>
+  </footer>
 </div>
-
-<input
-  type="text"
-  id="search"
-  placeholder="Search by tag number (file name)..."
-/>
-
-<ul id="fileList"></ul>
 
 <script>
 var files = [
@@ -241,23 +374,38 @@ var files = [
 ];
 
 var list = document.getElementById("fileList");
+var noResults = document.getElementById("noResults");
 var search = document.getElementById("search");
+var resultCount = document.getElementById("resultCount");
 
 function render(filter) {
   list.innerHTML = "";
+  noResults.style.display = "none";
 
-  files.forEach(function(file) {
-    if (!filter || file.toLowerCase().includes(filter.toLowerCase())) {
-      var li = document.createElement("li");
-      var link = document.createElement("a");
+  var filtered = files.filter(function(file) {
+    return !filter || file.toLowerCase().includes(filter.toLowerCase());
+  });
 
-      link.href = encodeURIComponent(file);   // ✅ ROOT FILE LINK
-      link.target = "_blank";
-      link.textContent = file;
+  if (filtered.length === 0) {
+    noResults.style.display = "block";
+    resultCount.textContent = "No results found";
+    return;
+  }
 
-      li.appendChild(link);
-      list.appendChild(li);
-    }
+  var countText = filtered.length === 1 ? "1 certificate found" : filtered.length + " certificates found";
+  resultCount.textContent = countText;
+
+  filtered.forEach(function(file) {
+    var card = document.createElement("div");
+    card.className = "certificate-card";
+    
+    var link = document.createElement("a");
+    link.href = encodeURIComponent(file);
+    link.target = "_blank";
+    link.textContent = file;
+    
+    card.appendChild(link);
+    list.appendChild(card);
   });
 }
 
