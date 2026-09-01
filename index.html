@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lifting Gear Certificate Search</title>
+<title>Lifting Gear Certificates</title>
 
 <style>
 * {
@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -31,47 +31,51 @@ header {
 }
 
 header h1 {
-  font-size: 2.5em;
+  font-size: 2.8em;
   margin-bottom: 10px;
   font-weight: 700;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 header p {
-  font-size: 1.05em;
+  font-size: 1.1em;
   opacity: 0.95;
   line-height: 1.6;
 }
 
 .search-section {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 #search {
-  width: 100%;
-  padding: 16px 20px;
-  font-size: 16px;
+  flex: 1;
+  min-width: 250px;
+  padding: 14px 20px;
+  font-size: 15px;
   border: none;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   transition: all 0.3s ease;
 }
 
 #search:focus {
   outline: none;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
   transform: translateY(-2px);
 }
 
 #search::placeholder {
-  color: #999;
+  color: #aaa;
 }
 
 .results-info {
-  margin-top: 15px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: white;
-  font-size: 1.1em;
   font-weight: 500;
 }
 
@@ -79,105 +83,182 @@ header p {
   background: rgba(255,255,255,0.2);
   padding: 8px 16px;
   border-radius: 20px;
-  display: inline-block;
   backdrop-filter: blur(10px);
+  white-space: nowrap;
+}
+
+.section-group {
+  margin-bottom: 40px;
+}
+
+.section-header {
+  background: rgba(255,255,255,0.15);
+  padding: 16px 20px;
+  border-radius: 12px 12px 0 0;
+  border-left: 5px solid #fff;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.section-icon {
+  font-size: 1.8em;
+}
+
+.section-title {
+  color: white;
+  font-size: 1.3em;
+  font-weight: 600;
+  flex: 1;
+}
+
+.section-count {
+  background: rgba(255,255,255,0.3);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  color: white;
+}
+
+.section-hidden .section-toggle {
+  transform: rotate(180deg);
+}
+
+.section-toggle {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 1.2em;
+}
+
+.section-toggle:hover {
+  background: rgba(255,255,255,0.3);
 }
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 0 0 12px 12px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
 }
 
-/* Responsive adjustments for tablets and mobile */
-@media (max-width: 768px) {
-  .certificates-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-  }
-
-  header h1 {
-    font-size: 2em;
-  }
-
-  body {
-    padding: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .certificates-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  header h1 {
-    font-size: 1.6em;
-  }
-
-  header p {
-    font-size: 0.95em;
-  }
+.section-hidden .certificates-grid {
+  display: none;
 }
 
 .certificate-card {
   background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100px;
+  min-height: 80px;
   text-align: center;
+  border: 2px solid transparent;
 }
 
 .certificate-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-}
-
-.certificate-card:hover a {
-  color: white;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  border-color: #667eea;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
 }
 
 .certificate-card a {
   text-decoration: none;
   color: #667eea;
   font-weight: 600;
-  font-size: 0.95em;
+  font-size: 0.9em;
   transition: color 0.3s ease;
   word-break: break-word;
   line-height: 1.4;
 }
 
+.certificate-card:hover a {
+  color: #764ba2;
+}
+
 .no-results {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 40px;
   color: white;
   background: rgba(255,255,255,0.1);
   border-radius: 12px;
-  font-size: 1.2em;
+  font-size: 1.1em;
   backdrop-filter: blur(10px);
+  margin-top: 40px;
 }
 
 .no-results-icon {
-  font-size: 3em;
-  margin-bottom: 15px;
+  font-size: 4em;
+  margin-bottom: 20px;
 }
 
 footer {
   text-align: center;
   color: rgba(255,255,255,0.7);
   font-size: 0.9em;
-  margin-top: 40px;
+  margin-top: 60px;
   padding-top: 20px;
   border-top: 1px solid rgba(255,255,255,0.2);
 }
 
+/* Responsive design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2em;
+  }
+
+  .search-section {
+    flex-direction: column;
+  }
+
+  #search {
+    min-width: 100%;
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .section-header {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.6em;
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .section-title {
+    font-size: 1.1em;
+  }
+}
 </style>
 </head>
 
@@ -185,230 +266,308 @@ footer {
 
 <div class="container">
   <header>
-    <h1>📋 Lifting Gear Certificates</h1>
-    <p>Store, track, and manage lifting gear inspection certificates in one centralized location</p>
+    <h1>⛓️ Lifting Gear Certificates</h1>
+    <p>Store, track, and manage lifting gear inspection certificates organized by equipment type</p>
   </header>
 
   <div class="search-section">
     <input
       type="text"
       id="search"
-      placeholder="🔍 Search by tag number or certificate name..."
+      placeholder="🔍 Search certificates..."
       autocomplete="off"
     />
     <div class="results-info">
-      <span id="resultCount">151 certificates available</span>
+      <span id="resultCount">151 certificates</span>
     </div>
   </div>
 
-  <div id="fileList" class="certificates-grid"></div>
+  <div id="sectionsContainer"></div>
 
   <div id="noResults" class="no-results" style="display: none;">
     <div class="no-results-icon">🚫</div>
-    <p>No certificates found. Try a different search term.</p>
+    <p>No certificates match your search. Try different keywords.</p>
   </div>
 
   <footer>
-    <p>✓ All certificates securely stored and easily searchable</p>
+    <p>✓ All lifting gear inspection certificates securely stored and organized by equipment type</p>
   </footer>
 </div>
 
 <script>
-var files = [
-"1. AA0253-0401.pdf",
-"2. 2402020002.pdf",
-"3. 2402030168.pdf",
-"4. 2402030166.pdf",
-"5. 2402030169.pdf",
-"6. AA198-0541.pdf",
-"7. AA118-0541.pdf",
-"8. AA040-0541.pdf",
-"9. AA044-0541.pdf",
-"10. 59051819.pdf",
-"11. 2308020022.pdf",
-"12. 2308020023.pdf",
-"13. 2308020024.pdf",
-"14. 2308020025.pdf",
-"15. 6375.pdf",
-"16. 6315.pdf",
-"17. 6481.pdf",
-"18. 6414.pdf",
-"19. 6417.pdf",
-"20. 5964.pdf",
-"21. C6697.pdf",
-"22. C6708.pdf",
-"23. C6704.pdf",
-"24. C6702.pdf",
-"25. B7787.pdf",
-"26. B7947.pdf",
-"27. B7601.pdf",
-"28. C2579.pdf",
-"29. C6359.pdf",
-"30. C6357.pdf",
-"31. C6356.pdf",
-"32. C6418.pdf",
-"33. C8034.pdf",
-"34. C8033.pdf",
-"35. C8032.pdf",
-"36. C8031.pdf",
-"37. K4199.pdf",
-"38. K4200.pdf",
-"39. K4201.pdf",
-"40. K4202.pdf",
-"41. K4203.pdf",
-"42. K4204.pdf",
-"43. K4205.pdf",
-"44. K4206.pdf",
-"45. K4207.pdf",
-"46. K4208.pdf",
-"47. K4209.pdf",
-"48. K4213.pdf",
-"49. K4214.pdf",
-"50. K4215.pdf",
-"51. K4216.pdf",
-"52. K4217.pdf",
-"53. K4218.pdf",
-"54. K4219.pdf",
-"55. K4220.pdf",
-"56. K4221.pdf",
-"57. K4222.pdf",
-"58. 132.pdf",
-"59. 131.pdf",
-"60. DQ098708.pdf",
-"61. DQ098709.pdf",
-"62. DQ24100660.pdf",
-"63. DQ101705.pdf",
-"64. DQ101706.pdf",
-"65. DQ47.pdf",
-"66. DQ37.pdf",
-"67. DQ1.pdf",
-"68. DQ2.pdf",
-"69. DQ3.pdf",
-"70. DQ4.pdf",
-"71. DQ103962.pdf",
-"72. DQ103963.pdf",
-"73. DQ103964.pdf",
-"74. DQ103965.pdf",
-"75. DQ088091.pdf",
-"76. DDR05942000020185.pdf",
-"77. DQ24100312.pdf",
-"78. DQ24100359.pdf",
-"79. 212786.pdf",
-"80. 212787.pdf",
-"81. 212788.pdf",
-"82. 212789.pdf",
-"83. 6081904168.pdf",
-"84. 6081904169.pdf",
-"85. 6081904158.pdf",
-"86. 6081904170.pdf",
-"87. DDR06101000020497.pdf",
-"88. DDR06101000020006.pdf",
-"89. DDR06101000020275.pdf",
-"90. DDR05893000020016.pdf",
-"91. DDR06100000020860.pdf",
-"92. DDR06075000010448.pdf",
-"93. E1.pdf",
-"94. E2.pdf",
-"95. E4.pdf",
-"96. A1.pdf",
-"97. A2.pdf",
-"98. A3.pdf",
-"99. A4.pdf",
-"100. AA 11.pdf",
-"101. AA 12.pdf",
-"102. AA 13.pdf",
-"103. AA 14.pdf",
-"104. T01210426.pdf",
-"105. T01210395.pdf",
-"106. T01211039.pdf",
-"107. T01211033.pdf",
-"108. T08200233.pdf",
-"109. T08200266.pdf",
-"110. 63180002.pdf",
-"111. 63180001.pdf",
-"112. 6558.pdf",
-"113. 6561.pdf",
-"114. YG861.pdf",
-"115. YG862.pdf",
-"116. YG859.pdf",
-"117. YG860.pdf",
-"118. DQ088092.pdf",
-"119. DQ088093.pdf",
-"120. DQ088094.pdf",
-"121. DQ088095.pdf",
-"122. B1.pdf",
-"123. B2.pdf",
-"124. B3.pdf",
-"125. B4.pdf",
-"126. B5.pdf",
-"127. B6.pdf",
-"128. B7.pdf",
-"129. B8.pdf",
-"130. B9.pdf",
-"131. B10.pdf",
-"132. B11.pdf",
-"133. B12.pdf",
-"134. B13.pdf",
-"135. B14.pdf",
-"136. B15.pdf",
-"137. B16.pdf",
-"138. B20.pdf",
-"139. B21.pdf",
-"140. B22.pdf",
-"141. B23.pdf",
-"142. B24.pdf",
-"143. B25.pdf",
-"144. B26.pdf",
-"145. B27.pdf",
-"146. B17.pdf",
-"147. B18.pdf",
-"148. B19.pdf",
-"149. 2000036.pdf",
-"150. 2000037.pdf",
-"151. Plate clamp.pdf"
-];
+var certificateData = {
+  "🔗 Chain Slings": [
+    "1. AA0253-0401.pdf",
+    "6. AA198-0541.pdf",
+    "7. AA118-0541.pdf",
+    "8. AA040-0541.pdf",
+    "9. AA044-0541.pdf",
+    "100. AA 11.pdf",
+    "101. AA 12.pdf",
+    "102. AA 13.pdf",
+    "103. AA 14.pdf"
+  ],
+  "🪝 Hooks & Shackles": [
+    "25. B7787.pdf",
+    "26. B7947.pdf",
+    "27. B7601.pdf",
+    "28. C2579.pdf",
+    "122. B1.pdf",
+    "123. B2.pdf",
+    "124. B3.pdf",
+    "125. B4.pdf",
+    "126. B5.pdf",
+    "127. B6.pdf",
+    "128. B7.pdf",
+    "129. B8.pdf",
+    "130. B9.pdf",
+    "131. B10.pdf",
+    "132. B11.pdf",
+    "133. B12.pdf",
+    "134. B13.pdf",
+    "135. B14.pdf",
+    "136. B15.pdf",
+    "137. B16.pdf",
+    "138. B20.pdf",
+    "139. B21.pdf",
+    "140. B22.pdf",
+    "141. B23.pdf",
+    "142. B24.pdf",
+    "143. B25.pdf",
+    "144. B26.pdf",
+    "145. B27.pdf",
+    "146. B17.pdf",
+    "147. B18.pdf",
+    "148. B19.pdf"
+  ],
+  "🎯 Hardware & Connectors": [
+    "21. C6697.pdf",
+    "22. C6708.pdf",
+    "23. C6704.pdf",
+    "24. C6702.pdf",
+    "29. C6359.pdf",
+    "30. C6357.pdf",
+    "31. C6356.pdf",
+    "32. C6418.pdf",
+    "33. C8034.pdf",
+    "34. C8033.pdf",
+    "35. C8032.pdf",
+    "36. C8031.pdf"
+  ],
+  "⚙️ Lifting Beams & Spreaders": [
+    "37. K4199.pdf",
+    "38. K4200.pdf",
+    "39. K4201.pdf",
+    "40. K4202.pdf",
+    "41. K4203.pdf",
+    "42. K4204.pdf",
+    "43. K4205.pdf",
+    "44. K4206.pdf",
+    "45. K4207.pdf",
+    "46. K4208.pdf",
+    "47. K4209.pdf",
+    "48. K4213.pdf",
+    "49. K4214.pdf",
+    "50. K4215.pdf",
+    "51. K4216.pdf",
+    "52. K4217.pdf",
+    "53. K4218.pdf",
+    "54. K4219.pdf",
+    "55. K4220.pdf",
+    "56. K4221.pdf",
+    "57. K4222.pdf"
+  ],
+  "🏋️ General Lifting Equipment": [
+    "2. 2402020002.pdf",
+    "3. 2402030168.pdf",
+    "4. 2402030166.pdf",
+    "5. 2402030169.pdf",
+    "10. 59051819.pdf",
+    "11. 2308020022.pdf",
+    "12. 2308020023.pdf",
+    "13. 2308020024.pdf",
+    "14. 2308020025.pdf",
+    "15. 6375.pdf",
+    "16. 6315.pdf",
+    "17. 6481.pdf",
+    "18. 6414.pdf",
+    "19. 6417.pdf",
+    "20. 5964.pdf"
+  ],
+  "📦 Drums & Reel Systems": [
+    "58. 132.pdf",
+    "59. 131.pdf",
+    "112. 6558.pdf",
+    "113. 6561.pdf"
+  ],
+  "🔧 Industrial Equipment": [
+    "60. DQ098708.pdf",
+    "61. DQ098709.pdf",
+    "62. DQ24100660.pdf",
+    "63. DQ101705.pdf",
+    "64. DQ101706.pdf",
+    "65. DQ47.pdf",
+    "66. DQ37.pdf",
+    "67. DQ1.pdf",
+    "68. DQ2.pdf",
+    "69. DQ3.pdf",
+    "70. DQ4.pdf",
+    "71. DQ103962.pdf",
+    "72. DQ103963.pdf",
+    "73. DQ103964.pdf",
+    "74. DQ103965.pdf",
+    "75. DQ088091.pdf",
+    "77. DQ24100312.pdf",
+    "78. DQ24100359.pdf",
+    "118. DQ088092.pdf",
+    "119. DQ088093.pdf",
+    "120. DQ088094.pdf",
+    "121. DQ088095.pdf"
+  ],
+  "🏭 Heavy Duty Equipment": [
+    "76. DDR05942000020185.pdf",
+    "79. 212786.pdf",
+    "80. 212787.pdf",
+    "81. 212788.pdf",
+    "82. 212789.pdf",
+    "83. 6081904168.pdf",
+    "84. 6081904169.pdf",
+    "85. 6081904158.pdf",
+    "86. 6081904170.pdf",
+    "87. DDR06101000020497.pdf",
+    "88. DDR06101000020006.pdf",
+    "89. DDR06101000020275.pdf",
+    "90. DDR05893000020016.pdf",
+    "91. DDR06100000020860.pdf",
+    "92. DDR06075000010448.pdf"
+  ],
+  "📋 Miscellaneous Gears": [
+    "93. E1.pdf",
+    "94. E2.pdf",
+    "95. E4.pdf",
+    "96. A1.pdf",
+    "97. A2.pdf",
+    "98. A3.pdf",
+    "99. A4.pdf",
+    "104. T01210426.pdf",
+    "105. T01210395.pdf",
+    "106. T01211039.pdf",
+    "107. T01211033.pdf",
+    "108. T08200233.pdf",
+    "109. T08200266.pdf",
+    "110. 63180002.pdf",
+    "111. 63180001.pdf",
+    "114. YG861.pdf",
+    "115. YG862.pdf",
+    "116. YG859.pdf",
+    "117. YG860.pdf",
+    "149. 2000036.pdf",
+    "150. 2000037.pdf",
+    "151. Plate clamp.pdf"
+  ]
+};
 
-var list = document.getElementById("fileList");
+var container = document.getElementById("sectionsContainer");
 var noResults = document.getElementById("noResults");
 var search = document.getElementById("search");
 var resultCount = document.getElementById("resultCount");
 
-function render(filter) {
-  list.innerHTML = "";
+function toggleSection(button) {
+  var section = button.closest(".section-group");
+  section.classList.toggle("section-hidden");
+  localStorage.setItem("section_" + section.id, section.classList.contains("section-hidden"));
+}
+
+function renderSections(filter) {
+  container.innerHTML = "";
   noResults.style.display = "none";
+  var totalVisible = 0;
 
-  var filtered = files.filter(function(file) {
-    return !filter || file.toLowerCase().includes(filter.toLowerCase());
+  Object.keys(certificateData).forEach(function(sectionTitle, index) {
+    var files = certificateData[sectionTitle];
+    var filtered = files.filter(function(file) {
+      return !filter || file.toLowerCase().includes(filter.toLowerCase());
+    });
+
+    if (filtered.length > 0) {
+      totalVisible += filtered.length;
+
+      var sectionId = "section_" + index;
+      var isHidden = localStorage.getItem(sectionId) === "true";
+
+      var section = document.createElement("div");
+      section.className = "section-group" + (isHidden ? " section-hidden" : "");
+      section.id = sectionId;
+
+      var header = document.createElement("div");
+      header.className = "section-header";
+
+      var titleSpan = document.createElement("span");
+      titleSpan.style.display = "flex";
+      titleSpan.style.alignItems = "center";
+      titleSpan.style.gap = "12px";
+      titleSpan.style.flex = "1";
+
+      var icon = document.createElement("span");
+      icon.className = "section-icon";
+      icon.textContent = sectionTitle.split(" ")[0];
+
+      var title = document.createElement("span");
+      title.className = "section-title";
+      title.textContent = sectionTitle.substring(2);
+
+      titleSpan.appendChild(icon);
+      titleSpan.appendChild(title);
+      header.appendChild(titleSpan);
+
+      var count = document.createElement("span");
+      count.className = "section-count";
+      count.textContent = filtered.length + " cert" + (filtered.length !== 1 ? "s" : "");
+      header.appendChild(count);
+
+      var button = document.createElement("button");
+      button.className = "section-toggle";
+      button.innerHTML = "▼";
+      button.onclick = function() { toggleSection(button); };
+      header.appendChild(button);
+
+      section.appendChild(header);
+
+      var grid = document.createElement("div");
+      grid.className = "certificates-grid";
+
+      filtered.forEach(function(file) {
+        var card = document.createElement("div");
+        card.className = "certificate-card";
+        
+        var link = document.createElement("a");
+        link.href = encodeURIComponent(file);
+        link.target = "_blank";
+        link.textContent = file;
+        
+        card.appendChild(link);
+        grid.appendChild(card);
+      });
+
+      section.appendChild(grid);
+      container.appendChild(section);
+    }
   });
 
-  if (filtered.length === 0) {
+  if (totalVisible === 0) {
     noResults.style.display = "block";
-    resultCount.textContent = "No results found";
-    return;
+    resultCount.textContent = "No results";
+  } else {
+    var text = totalVisible === 1 ? "1 certificate found" : totalVisible + " certificates found";
+    resultCount.textContent = text;
   }
-
-  var countText = filtered.length === 1 ? "1 certificate found" : filtered.length + " certificates found";
-  resultCount.textContent = countText;
-
-  filtered.forEach(function(file) {
-    var card = document.createElement("div");
-    card.className = "certificate-card";
-    
-    var link = document.createElement("a");
-    link.href = encodeURIComponent(file);
-    link.target = "_blank";
-    link.textContent = file;
-    
-    card.appendChild(link);
-    list.appendChild(card);
-  });
 }
 
 search.addEventListener("input", function() {
-  render(search.value);
+  renderSections(search.value);
 });
 
-render("");
+renderSections("");
 </script>
 
 </body>
